@@ -1,0 +1,2 @@
+class AttestorError(Exception):
+    pass

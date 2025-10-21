@@ -1,0 +1,50 @@
+{
+  "$id": "schema://bootattestor/baseline.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "platform",
+    "digests",
+    "variables",
+    "created_at"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "platform": {
+      "type": "string",
+      "enum": [
+        "linux",
+        "windows"
+      ]
+    },
+    "digests": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "patternProperties": {
+          "^[0-9]+$": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{40,128}$"
+          }
+        }
+      },
+      "minProperties": 1
+    },
+    "variables": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{64}$"
+      }
+    },
+    "created_at": {
+      "type": "integer",
+      "minimum": 0
+    }
+  },
+  "additionalProperties": false
+}
